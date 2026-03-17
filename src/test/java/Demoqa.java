@@ -15,20 +15,29 @@ public class Demoqa {
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/text-box");
 
+        String fullNameValue = "Sonia";
+
         WebElement fullName = driver.findElement(By.id("userName"));
         WebElement email = driver.findElement(By.id("userEmail"));
         WebElement currentAddress = driver.findElement(By.id("currentAddress"));
         WebElement permanentAddress = driver.findElement(By.id("permanentAddress"));
 
         WebElement submit = driver.findElement(By.className("btn-primary"));
+        boolean display = submit.isDisplayed();
+        boolean enable = submit.isEnabled();
 
-        fullName.sendKeys("Sonia");
+        Assert.assertTrue(display, "Button is not displayed");
+        Assert.assertTrue(display, "Button is not enable");
+
+        System.out.println(display + " " + enable);
+
+        fullName.sendKeys(fullNameValue);
         email.sendKeys("test@itschool.com");
         currentAddress.sendKeys("Bucuresti");
         permanentAddress.sendKeys("Ilfov");
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,300)");
+        js.executeScript("window.scrollBy(0,1000)");
 
         submit.click();
 
@@ -36,7 +45,14 @@ public class Demoqa {
 
 
 
-        Assert.assertTrue(output.isDisplayed());
+       // Assert.assertTrue(output.isDisplayed());
+
+
+        String outputName = driver.findElement(By.id("name")).getText();
+
+        System.out.println(outputName);
+
+        Assert.assertTrue(outputName.contains(fullNameValue), "Output name nu este corect");
 
 
     }
@@ -71,7 +87,6 @@ public class Demoqa {
 
         Assert.assertTrue(classAtribute.contains("field-error"));
     }
-
 
 
     }

@@ -50,4 +50,24 @@ public class ActionsButtons {
         WebElement outputMessageClick = driver.findElement(By.id("dynamicClickMessage"));
         Assert.assertTrue(outputMessageClick.isDisplayed());
     }
+
+
+    @Test
+    public void buton() {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://demoqa.com/buttons");
+
+        WebElement clickMe = driver.findElement(By.xpath("//button[text()='Click Me']"));
+        clickMe.click();
+
+        WebElement output = driver.findElement(By.id("dynamicClickMessage"));
+
+        boolean outputMsg = output.isDisplayed();
+
+        Assert.assertTrue(outputMsg, "Message is not displayed");
+
+        String dynamicClickMsg = output.getText();
+        Assert.assertEquals(dynamicClickMsg, "You have done a dynamic click", "Message is not correct!");
+    }
 }
